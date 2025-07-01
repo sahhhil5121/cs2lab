@@ -1,0 +1,10 @@
+clc; clear; close;
+fs = 1000; Tb = 0.2; t = 0:1/fs:Tb; fc = 10;
+data = [0 1 1 0 0 1 1 1 0 1]; m = kron(data, ones(1, length(t)));
+c = sin(2*%pi*fc*t); d = []; p = 0;
+for i = 1:length(data), p = p + %pi*data(i); d = [d, cos(2*%pi*fc*t + p)]; end
+T = 0:1/fs:(length(d)-1)/fs;
+scf(0);
+subplot(3,1,1); plot(T, m); title("Message");
+subplot(3,1,2); plot(t, c, 'r'); title("Carrier");
+subplot(3,1,3); plot(T, d); title("DPSK"); xgrid();
