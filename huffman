@@ -1,0 +1,17 @@
+clc; clear;
+s = [1 2 3 4 5]; p = [0.4 0.2 0.15 0.15 0.1];
+N = list(); for i = 1:length(s), N($+1) = list(p(i), string(s(i))); end
+
+while length(N) > 1
+    for i = 1:length(N)-1, for j = 1:length(N)-i
+        if N(j)(1) > N(j+1)(1) then t = N(j); N(j) = N(j+1); N(j+1) = t; end
+    end; end
+    N = list(list(N(1)(1)+N(2)(1), N(1), N(2)), N(3:$));
+end
+
+function C=code(n, p, C)
+    if typeof(n(2)) == "string" then C($+1) = n(2)+":"+p;
+    else C = code(n(2), p+"0", C); C = code(n(3), p+"1", C); end
+endfunction
+
+disp(code(N(1), "", list()));
