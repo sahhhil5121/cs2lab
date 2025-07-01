@@ -1,0 +1,15 @@
+clc; clear; close;
+
+SNRdB = 0:2:20;
+SNR = 10.^(SNRdB/10);
+
+BER_th_ASK = 0.5 * erfc(0.5 * sqrt(SNR));    
+BER_th_FSK = 0.5 * erfc(sqrt(SNR/2));        
+BER_th_PSK = 0.5 * erfc(sqrt(SNR));         
+
+clf();
+plot(SNRdB, BER_th_ASK, 'r-', SNRdB, BER_th_FSK, 'g-', SNRdB, BER_th_PSK, 'b-');
+xlabel("SNR (dB)"); ylabel("Bit Error Rate (BER)");
+title("Theoretical BER vs SNR for ASK, FSK, PSK in AWGN");
+legend(["ASK (BASK)","FSK (BFSK)","PSK (BPSK)"], "in_upper_right");
+xgrid();
