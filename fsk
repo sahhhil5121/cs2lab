@@ -1,0 +1,12 @@
+clc; clear;
+
+fp=500; fc1=10000; fc2=20000; fs=100000; t=0:1/fs:0.01;
+c1=sin(2*%pi*fc1*t);
+c2=sin(2*%pi*fc2*t);
+m=squarewave(2*%pi*fp*t);
+w = c1 .* (m >= 0) + c2 .* (m < 0);
+
+subplot(4,1,1); plot(t,c1); title("Carrier 1");
+subplot(4,1,2); plot(t,c2); title("Carrier 2");
+subplot(4,1,3); plot(t,m); title("Message");
+subplot(4,1,4); plot(t,w); title("FSK");
